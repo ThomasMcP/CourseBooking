@@ -6,6 +6,7 @@ import com.codeclan.CourseBookings.CourseBookings.models.Customer;
 import com.codeclan.CourseBookings.CourseBookings.repositories.BookingRepository.BookingRepository;
 import com.codeclan.CourseBookings.CourseBookings.repositories.CourseRepository.CourseRepository;
 import com.codeclan.CourseBookings.CourseBookings.repositories.CustomerRepository.CustomerRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,26 +32,36 @@ public class CourseBookingsApplicationTests {
 	@Autowired
 	CustomerRepository customerRepository;
 
-	@Test
-	public void canSaveCourse(){
-		Course course = new Course("CodeClan", "Edinburgh", 5);
-		courseRepository.save(course);
-		assertEquals(1, courseRepository.findAll().size());
-	}
-
-	@Test
-	public void canSaveCustomer(){
-		Customer customer = new Customer("Jake", "Edinburgh", 26);
-		customerRepository.save(customer);
-		assertEquals(1, customerRepository.findAll().size());
-	}
+//	@Ignore
+//	@Test
+//	public void canSaveCourse(){
+//		Course course = new Course("CodeClan", "Edinburgh", 5);
+//		courseRepository.save(course);
+//		assertEquals(1, courseRepository.findAll().size());
+//	}
+//
+//
+//	@Test
+//	public void canSaveCustomer(){
+//		Customer customer = new Customer("Jake", "Edinburgh", 26);
+//		customerRepository.save(customer);
+//		assertEquals(1, customerRepository.findAll().size());
+//	}
 
 	@Test
 	public void canSaveBooking(){
-		Booking booking = new Booking("10-10-19");
+		Customer customer = new Customer("Jake", "Edinburgh", 26);
+		customerRepository.save(customer);
+		Course course = new Course("CodeClan", "Edinburgh", 5);
+		courseRepository.save(course);
+		Booking booking = new Booking("10-10-19", course, customer);
 		bookingRepository.save(booking);
 		assertEquals(1, bookingRepository.findAll().size());
+		assertEquals(1, customerRepository.findAll().size());
+		assertEquals(1, courseRepository.findAll().size());
 	}
+
+
 
 }
 
